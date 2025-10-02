@@ -315,3 +315,24 @@
 </body>
 </html>
 
+
+<header>
+    <h1>🎮 Newsgames Daily Update 🎮</h1>
+</header>
+
+<main id="content">
+    <div class="news-section">
+        <h2>Minecraft Enters 'The Copper Age' with Major 1.21.9 Update</h2>
+        <p>Mojang has officially launched the highly anticipated 'Copper Age' game drop, bringing version 1.21.9 to both Java and Bedrock editions. The update introduces a massive collection of copper-based items, including new tools, armor, lighting sources, and the adorable, versatile Copper Golem mob.</p>
+    </div>
+
+    <div class="news-section">
+        <h2>EA to be Acquired in Record-Breaking $55 Billion Private Equity Buyout</h2>
+        <p>Electronic Arts (EA), the publisher behind huge franchises like Madden NFL, The Sims, and Battlefield, has agreed to be acquired by an investor group in a massive deal valued at $55 billion. This marks one of the largest private equity buyouts in history and is expected to close in early 2027.</p>
+    </div>
+
+</main>
+
+<footer>
+    <p>&copy; 2025 Newsgames - Powered by GitHub Pages and Gemini</p>
+</footer>
