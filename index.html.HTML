@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WIN/11 Gaming Hub - لوحة تحكم الألعاب</title>
+    <!-- Tailwind CSS CDN for modern, responsive styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom Font */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            direction: rtl; /* Ensure Right-to-Left for Arabic content */
+            text-align: right; /* Default text alignment */
+        }
+        /* Custom scrollbar for a "cool" look */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1f2937; } /* Dark track */
+        ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 4px; } /* Electric blue thumb */
+        ::-webkit-scrollbar-thumb:hover { background: #60a5fa; }
+    </style>
+    <!-- Tailwind Configuration for custom colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#3b82f6',
+                        'dark-bg': '#111827',
+                        'light-text': '#f3f4f6',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-dark-bg text-light-text min-h-screen">
+
+    <!-- Header & Navigation -->
+    <header class="bg-gray-900 shadow-xl sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <h1 class="text-3xl font-extrabold text-primary-blue cursor-pointer" onclick="navigateTo('home')">
+                🎮 WIN/11 HUB
+            </h1>
+            
+            <nav class="flex items-center space-x-4 space-x-reverse">
+                <button class="text-light-text hover:text-primary-blue transition duration-150" onclick="navigateTo('media_guide')">
+                    دليل الوسائط
+                </button>
+                <!-- Static Link as Placeholder for Auth -->
+                <a href="#" class="bg-primary-blue text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-600 transition duration-150 shadow-md">
+                    حسابي (تم تعطيله)
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Content will be rendered here based on the current page state -->
+        <div id="app-content">
+            <!-- Default Home content loads here -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 mt-12 py-6 text-center text-gray-500">
+        <p>&copy; 2025 WIN/11 Gaming Hub. جميع الحقوق محفوظة.</p>
+    </footer>
+
+
+    <script>
+        // =========================================================================
+        // 1. GLOBAL STATE & UTILITIES
+        // =========================================================================
+        const appContent = document.getElementById('app-content');
+        
+        // Navigation history to allow 'back' functionality
+        let pageHistory = [];
+
+        // Make functions globally accessible
+        window.navigateTo = navigateTo;
+        window.goBack = goBack;
+
+        // --- CONTENT DATA (Remains the same) ---
+        const ARTICLE_CONTENT = {
+            'kb503831': {
+                title: "تحديث Windows 11 KB503831 - تأكيد تعزيز الأداء",
+                date: "نُشر في: 1 أكتوبر 2025",
+                body: `
+                    <p>يعد تحديث هذا الأسبوع من Microsoft (KB503831) تثبيتًا إلزاميًا لجميع لاعبي Windows 11. على الرغم من أن التقارير الأولية أشارت إلى أنه مجرد تصحيح أمني، فقد أكدت الاختبارات أنه **أصلح بهدوء مشكلة قديمة تتعلق بتخصيص موارد DirectX 12**.</p>
+                    <h3 class="text-xl font-semibold mt-4 text-primary-blue">ماذا يعني هذا لمعدل الإطارات (FPS)؟</h3>
+                    <p>لاحظ اللاعبون الذين يستخدمون وحدات معالجة رسومات (GPUs) متوسطة إلى عالية المدى **زيادة ثابتة بنسبة 3-5% في الحد الأدنى لمعدلات الإطارات** عبر عناوين مثل <em>Cyberpunk 2077</em> و <em>Halo Infinite</em>. هذا يمنع التأتأة والانخفاضات المفاجئة التي كانت شائعة في مشاهد الحركة العالية.</p>
+                    <h3 class="text-xl font-semibold mt-4 text-primary-blue">الإجراء المطلوب:</h3>
+                    <p>تأكد من التحقق من Windows Update لتنزيل وتثبيت KB503831 فورًا للاستمتاع بأداء أكثر سلاسة. **قم دائمًا بنسخ نظامك احتياطيًا قبل تثبيت التحديثات الرئيسية.**</p>
+                `
+            },
+            'gamepass': {
+                title: "إشاعة Game Pass: لعبة تقمص أدوار (RPG) متوقعة الأسبوع المقبل",
+                date: "نُشر في: 30 سبتمبر 2025",
+                body: `
+                    <p>تتزايد الشائعات بأن لعبة "Starfield 2" ستتم إضافتها إلى كتالوج PC Game Pass كإصدار يوم أول يوم الثلاثاء المقبل. على الرغم من أن Microsoft لم تؤكد العنوان رسميًا، فإن تسريبات من العديد من المطلعين على الصناعة تشير إلى أن الإعلان قادم قريبًا جدًا.</p>
+                    <h3 class="text-xl font-semibold mt-4 text-primary-blue">لماذا يجب عليك تجهيز جهاز الكمبيوتر الخاص بك؟</h3>
+                    <p>من المتوقع أن تتطلب لعبة تقمص الأدوار الضخمة هذه أكثر من **120 جيجابايت** من مساحة التخزين. إذا كانت مساحة SSD لديك منخفضة، فقد حان الوقت لبدء مسح الألعاب القديمة! استخدم أداة تنظيف القرص المضمنة في Windows لحذف الملفات المؤقتة بأمان.</p>
+                    <p>من المتوقع أن تكون متطلبات الكمبيوتر الشخصي الدنيا عالية، لذا تأكد من **تحديث برامج تشغيل الرسومات** لديك بالكامل للحصول على أفضل تجربة إطلاق.</p>
+                    <h3 class="text-xl font-semibold mt-4 text-primary-blue">الإجراء المطلوب:</h3>
+                    <ul class="list-disc pr-6 mt-2 space-y-2">
+                        <li>**قم بتفريغ ما لا يقل عن 120 جيجابايت** على محرك الأقراص المخصص للألعاب.</li>
+                        <li>**تحقق من تحديثات برامج التشغيل** لبطاقة NVIDIA أو AMD الخاصة بك.</li>
+                    </ul>
+                `
+            },
+            'hardware': {
+                title: "معدات الميزانية: لماذا معالجك (CPU) أهم من بطاقة الرسومات (GPU)",
+                date: "نُشر في: 28 سبتمبر 2025",
+                body: `
+                    <p>بالنسبة للاعبين الذين يهدفون إلى 60 إطارًا في الثانية (60 FPS) على إعدادات متوسطة، فإن المعالج غالبًا ما يكون هو العامل المقيد. المعالج القوي يضمن بقاء معدل الإطارات لديك ثابتًا، مما يقلل من التأتأة ويحسن الأداء العام.</p>
+                    <h3 class="text-xl font-semibold mt-4 text-primary-blue">مشكلة عنق الزجاجة (Bottlenecking)</h3>
+                    <p>إذا كان لديك بطاقة رسومات قوية ولكن معالج قديم، فإن بطاقتك ستضطر إلى الانتظار، مما يؤدي إلى عدم استخدامها بالكامل. هذا هو ما يسمى "عنق الزجاجة" (Bottleneck).</p>
+                    <h3 class="text-xl font-semibold mt-4 text-primary-blue">نصيحة سريعة</h3>
+                    <p>إذا كنت تتطلع إلى الترقية بميزانية محدودة، فاستثمر في معالج i5/Ryzen 5 حديث بدلاً من إنفاق كل شيء على بطاقة رسومات جديدة. سيؤدي هذا إلى أداء أكثر توازناً واستقراراً.</p>
+                `
+            }
+        };
+
+        // =========================================================================
+        // 2. NAVIGATION AND HISTORY LOGIC (New/Updated)
+        // =========================================================================
+
+        /**
+         * Navigates to a new page and updates history, unless coming from 'goBack'.
+         * @param {string} page The key of the page to render.
+         * @param {boolean} isBack Set to true when rendering from history pop (prevents push).
+         */
+        function navigateTo(page, isBack = false) {
+            // Update history only if it's a forward navigation or a new page is explicitly requested
+            if (!isBack && page !== pageHistory[pageHistory.length - 1]) {
+                pageHistory.push(page);
+            }
+            
+            // Limit history depth to avoid excessive memory use
+            if (pageHistory.length > 20) {
+                pageHistory.shift(); 
+            }
+
+            // Route to the correct renderer
+            switch (page) {
+                case 'home':
+                    renderHome();
+                    break;
+                case 'media_guide':
+                    renderMediaGuide();
+                    break;
+                case 'kb503831':
+                case 'gamepass':
+                case 'hardware':
+                    renderArticle(page);
+                    break;
+                default:
+                    render404();
+            }
+        }
+        
+        /**
+         * Handles backward navigation using the history stack.
+         */
+        function goBack() {
+            if (pageHistory.length > 1) {
+                // Remove the current page from history
+                pageHistory.pop(); 
+                // Get the previous page key (which is now the last item)
+                const previousPage = pageHistory[pageHistory.length - 1]; 
+                
+                if (previousPage) {
+                    // Render the previous page but set the flag so navigateTo doesn't push it again
+                    navigateTo(previousPage, true);
+                } else {
+                    // If history is broken, default to home
+                    navigateTo('home');
+                }
+            } else {
+                // Already on the first page, just ensure home is rendered
+                navigateTo('home');
+            }
+        }
+
+        // =========================================================================
+        // 3. PAGE RENDERING FUNCTIONS (Updated to use goBack)
+        // =========================================================================
+
+        function renderArticle(key) {
+            const article = ARTICLE_CONTENT[key];
+            if (!article) return render404(); // Fallback if key is invalid
+
+            appContent.innerHTML = `
+                <div class="bg-gray-800 p-8 rounded-xl shadow-2xl">
+                    <!-- Dynamic Back Button -->
+                    <button class="text-primary-blue hover:text-blue-400 mb-4 text-sm font-bold flex items-center space-x-2 space-x-reverse" onclick="goBack()">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                        العودة للخلف
+                    </button>
+                    <h2 class="text-4xl font-extrabold text-primary-blue mb-2">${article.title}</h2>
+                    <p class="text-sm text-gray-400 mb-6">${article.date}</p>
+                    <div class="text-lg leading-relaxed space-y-4 text-light-text">${article.body}</div>
+                </div>
+            `;
+        }
+
+        function renderMediaGuide() {
+            appContent.innerHTML = `
+                <div class="bg-gray-800 p-8 rounded-xl shadow-2xl">
+                    <!-- Dynamic Back Button -->
+                    <button class="text-primary-blue hover:text-blue-400 mb-4 text-sm font-bold flex items-center space-x-2 space-x-reverse" onclick="goBack()">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                        العودة للخلف
+                    </button>
+                    <h2 class="text-4xl font-extrabold text-primary-blue mb-6">دليل الوسائط: إضافة الصور والفيديو</h2>
+                    <p class="text-lg mb-6">إليك شرح كيفية دمج الوسائط في صفحات HTML، مع أمثلة حديثة:</p>
+
+                    <div class="space-y-8">
+                        
+                        <!-- Image Section -->
+                        <div class="bg-gray-700 p-6 rounded-lg shadow-inner">
+                            <h3 class="text-2xl font-bold mb-4 border-b border-gray-600 pb-2">1. إضافة صورة (<code class="bg-gray-900 p-1 rounded text-primary-blue">&lt;img&gt;</code>)</h3>
+                            <p class="mb-4">استخدم علامة &lt;img&gt; وضع رابط الصورة في خاصية <code class="bg-gray-900 p-1 rounded text-primary-blue">src</code>. الـ <code class="bg-gray-900 p-1 rounded text-primary-blue">alt</code> مهم جداً!</p>
+                            <div class="media-box mt-4 border-2 border-primary-blue rounded-lg overflow-hidden">
+                                <img src="https://placehold.co/600x300/1a4f9d/ffffff?text=Your+Gaming+Image" alt="صورة توضيحية" style="width: 100%; height: auto; display: block; margin: 0 auto;" class="max-w-xl mx-auto">
+                            </div>
+                        </div>
+
+                        <!-- Video Section -->
+                        <div class="bg-gray-700 p-6 rounded-lg shadow-inner">
+                            <h3 class="text-2xl font-bold mb-4 border-b border-gray-600 pb-2">2. إضافة فيديو (تضمين - <code class="bg-gray-900 p-1 rounded text-primary-blue">&lt;iframe&gt;</code>)</h3>
+                            <p class="mb-4">تضمين فيديو من يوتيوب هو الأسهل والأكثر توافقاً. استخدم كود التضمين الذي تحصل عليه من موقع يوتيوب:</p>
+                            <div class="media-box relative" style="padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                                <iframe 
+                                    src="https://www.youtube.com/embed/w7ejE1YgHn8?rel=0" 
+                                    frameborder="0" 
+                                    allowfullscreen
+                                    class="absolute top-0 left-0 w-full h-full border-4 border-primary-blue rounded-lg"
+                                ></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderHome() {
+            appContent.innerHTML = `
+                <!-- Featured Guide -->
+                <div class="bg-gray-800 p-6 rounded-xl shadow-2xl mb-8 border-t-4 border-primary-blue">
+                    <h2 class="text-3xl font-bold text-primary-blue mb-4">الدليل المميز: صيانة بسيطة لأداء مستقر</h2>
+                    <p class="text-lg mb-4 text-gray-300">جهاز كمبيوتر الألعاب السريع يبدأ بالصيانة الأساسية. لا تحتاج إلى برامج معقدة للحفاظ على سلاسة الأمور. اتبع هذه الخطوات البسيطة:</p>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="bg-gray-700 p-4 rounded-lg">
+                            <h3 class="text-xl font-semibold text-light-text mb-2">1. أعد تشغيل جهازك بانتظام</h3>
+                            <p class="text-gray-400">أفضل وأسهل نصيحة! إعادة تشغيل Windows يمسح ملفات الذاكرة المؤقتة ويحل الأخطاء الصغيرة التي تتراكم.</p>
+                        </div>
+                        <div class="bg-gray-700 p-4 rounded-lg">
+                            <h3 class="text-xl font-semibold text-light-text mb-2">2. استخدم "Disk Cleanup"</h3>
+                            <p class="text-gray-400">ابحث عن **Disk Cleanup** في قائمة "ابدأ". تزيل هذه الأداة المضمنة بأمان ملفات التثبيت القديمة والبيانات المخزنة مؤقتًا.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Latest News Section -->
+                <div class="bg-gray-800 p-6 rounded-xl shadow-2xl">
+                    <h2 class="text-3xl font-bold text-primary-blue mb-4 border-b border-gray-700 pb-2">أحدث أخبار Windows والألعاب</h2>
+                    <ul class="space-y-4">
+                        <li class="p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition duration-150">
+                            <a href="#" class="text-xl font-semibold text-light-text hover:text-primary-blue" onclick="event.preventDefault(); navigateTo('kb503831')">
+                                **عاجل:** تحديث Windows 11 KB503831 يحل مشكلة تأتأة كبيرة!
+                            </a>
+                            <p class="text-sm text-gray-400">نُشر في: 1 أكتوبر 2025</p>
+                        </li>
+                        <li class="p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition duration-150">
+                            <a href="#" class="text-xl font-semibold text-light-text hover:text-primary-blue" onclick="event.preventDefault(); navigateTo('gamepass')">
+                                **إشاعة Game Pass:** لعبة RPG متوقعة الأسبوع المقبل - جهز مساحتك!
+                            </a>
+                            <p class="text-sm text-gray-400">نُشر في: 30 سبتمبر 2025</p>
+                        </li>
+                        <li class="p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition duration-150">
+                            <a href="#" class="text-xl font-semibold text-light-text hover:text-primary-blue" onclick="event.preventDefault(); navigateTo('hardware')">
+                                **معدات الميزانية:** لماذا معالجك (CPU) أهم من بطاقة الرسومات (GPU) لأداء 60 FPS.
+                            </a>
+                            <p class="text-sm text-gray-400">نُشر في: 28 سبتمبر 2025</p>
+                        </li>
+                    </ul>
+                </div>
+            `;
+        }
+        
+        function render404() {
+             appContent.innerHTML = `
+                <div class="bg-gray-800 p-8 rounded-xl shadow-2xl text-center">
+                     <!-- Dynamic Back Button -->
+                    <button class="text-primary-blue hover:text-blue-400 mb-4 text-sm font-bold flex items-center justify-center mx-auto space-x-2 space-x-reverse" onclick="goBack()">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                        العودة للخلف
+                    </button>
+                    <h2 class="text-6xl font-extrabold text-red-500 mb-4">404</h2>
+                    <p class="text-xl mb-6">عذراً، الصفحة المطلوبة غير موجودة.</p>
+                </div>
+            `;
+        }
+
+        // Load the home page on initialization
+        // Start history by loading 'home'
+        navigateTo('home');
+        
+    </script>
+</body>
+</html>
